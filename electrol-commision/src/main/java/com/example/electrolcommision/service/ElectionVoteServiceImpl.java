@@ -1,5 +1,6 @@
 package com.example.electrolcommision.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,7 @@ public class ElectionVoteServiceImpl implements ElectionVoteService{
 				voter.setVoted(true);
 				ElectionVotesRepo.save(electionVote);
 				voterRepo.save(voter);
-				return "voted";
+				return "Vote is Casted";
 			}else return "Voter already voted";
 		}else return "Voter not registered";
 	}
@@ -47,7 +48,20 @@ public class ElectionVoteServiceImpl implements ElectionVoteService{
 	public ElectionVotes getVote(Long id) {
 		return ElectionVotesRepo.findById(id).get();
 	}
-	
-	
+
+	@Override
+	public Party findOverallWinningparty() {
+		ArrayList<WinningParty> partycount = (ArrayList<WinningParty>) ElectionVotesRepo.overallWinningParty();
+		Party party=PartyRepo.findById(partycount.get(0).getParty_id()).get();
+		return party;
+	}
+
+
+	@Override
+	public Party findConstituencyWinningparty(Long constituencyid) {
+		ArrayList<WinningParty> partycount = (ArrayList<WinningParty>) ElectionVotesRepo.constituencyWinningParty(constituencyid);
+		Party party=PartyRepo.findById(partycount.get(0).getParty_id()).get();
+		return party;
+	}
 
 }

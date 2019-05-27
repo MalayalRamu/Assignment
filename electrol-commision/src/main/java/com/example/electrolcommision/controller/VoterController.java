@@ -32,9 +32,4 @@ public class VoterController {
 		return voterService.getAllVoters();
 	}
 	
-//	@PostMapping("/ec/voter/cast")
-//	public ResponseEntity<ElectionVotes> castAVote(@RequestBody CastRequest request) {
-//		//voterService.castVote(request);
-//		return new ResponseEntity(voterService.castVote(request),HttpStatus.OK);
-//	}
 }

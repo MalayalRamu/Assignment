@@ -21,21 +21,14 @@ public class ElectionVotes {
 	@Column(name="vote_id")
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "party_id")
-	@Fetch(FetchMode.JOIN)
-	private Party party;
+	@Column(name="party_id")
+	private Long partyid;
 	
-	@ManyToOne
-	@JoinColumn(name = "constituency_id")
-	@Fetch(FetchMode.JOIN)
-	private Constituency constituency;
+	@Column(name="constituency_id")
+	private Long constituencyid;
 	
-
-	@ManyToOne
-	@JoinColumn(name = "voter_id")
-	@Fetch(FetchMode.JOIN)
-	private Voter voter ;
+	@Column(name="voter_id")
+	private Long voterid;
 	
 	
 	public Long getId() {
@@ -45,38 +38,33 @@ public class ElectionVotes {
 		this.id = id;
 	}
 
-	public Party getParty() {
-		return party;
+	public Long getpartyid() {
+		return partyid;
 	}
-	public void setParty(Party party) {
-		this.party = party;
+	public void setpartyid(Long id) {
+		this.partyid = id;
 	}
-	public Constituency getConstituency() {
-		return constituency;
+	
+	public Long getconstituencyid() {
+		return constituencyid;
 	}
-	public void setConstituency(Constituency constituency) {
-		this.constituency = constituency;
+	public void setconstituencyid(Long id) {
+		this.constituencyid = id;
 	}
-	public Voter getVoter() {
-		return voter;
+	
+	public Long getvoterid() {
+		return voterid;
 	}
-	public void setVoter(Voter voter) {
-		this.voter = voter;
+	public void setvoterid(Long id) {
+		this.voterid = id;
 	}
 	
 	public static ElectionVotes newVote(Long partyId, Long constituencyId,Long voterId) {
 		ElectionVotes vote = new ElectionVotes();
-		Party p = new Party();
-		p.setId(partyId);
-		Constituency consti = new Constituency();
-		consti.setId(constituencyId);
-		Voter voter = new Voter();
-		voter.setId(voterId);
-		vote.setConstituency(consti);
-		vote.setParty(p);
-		vote.setVoter(voter);
+		vote.setconstituencyid(constituencyId);
+		vote.setpartyid(partyId);
+		vote.setvoterid(voterId);
 		return vote;
 	}
-	
 	
 }

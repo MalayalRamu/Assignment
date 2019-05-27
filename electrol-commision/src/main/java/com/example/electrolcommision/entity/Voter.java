@@ -18,9 +18,9 @@ public class Voter {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="voter_id")
-	private Long id;
+	private Long voterid;
 	@Column(name="votername")
-	private String name;
+	private String votername;
 	
 	@ManyToOne
 	@JoinColumn(name = "constituency_id")
@@ -28,19 +28,19 @@ public class Voter {
 	private Constituency constituency;
 	
 	public Long getId() {
-		return id;
+		return voterid;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.voterid = id;
 	}
 
 	public String getName() {
-		return name;
+		return votername;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.votername = name;
 	}
 
 	public Constituency getConstituency() {

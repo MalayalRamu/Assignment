@@ -27,7 +27,6 @@ public class ElectionVotesController {
 	@PostMapping("/ec/vote/cast")
 	public ResponseEntity<String> castAVote(@RequestBody CastRequest request) {
 		return new ResponseEntity(electionvoteService.castVote(request),HttpStatus.OK);
-
 	}
 	
 	@GetMapping("/ec/vote/deatils/{id}")
@@ -35,5 +34,14 @@ public class ElectionVotesController {
 		return electionvoteService.getVote(id);
 	}
 	
+	@GetMapping("/ec/overallwinningparty")
+	public Party getoverallwinningparty(){
+		return electionvoteService.findOverallWinningparty();
+	}
+	
+	@GetMapping("/ec/constituencywinningparty/{id}")
+	public Party getConstituencyWinningParty(@PathVariable("id") Long id){
+		return electionvoteService.findConstituencyWinningparty(id);
+	}
 }
 

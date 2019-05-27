@@ -13,20 +13,20 @@ public class Constituency {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="constituency_id")
-	private Long id;
+	private Long constituencyid;
 	@Column(name="constituencyname")
-	private String name;
+	private String constituencyname;
 	public Long getId() {
-		return id;
+		return constituencyid;
 	}
 	public void setId(Long id) {
-		this.id = id;
+		this.constituencyid = id;
 	}
 	public String getName() {
-		return name;
+		return constituencyname;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.constituencyname = name;
 	}
 	
 }

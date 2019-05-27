@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.electrolcommision.entity.ElectionVotes;
@@ -13,10 +14,11 @@ import com.example.electrolcommisioncom.domain.WinningParty;
 
 @Repository
 public interface ElectionVotesRepository extends CrudRepository<ElectionVotes, Long>{
-//	@EntityGraph(attributePaths = {"Party","Constituency"})
-//	ElectionVotes findOneWithPartyAndConstituencyByPartyIdAndConstituencyId(Long partyId, Long constituencyId);
 	
-	@Query("select new com.example.electrolcommisioncom.domain.WinningParty(party_id, count(party_id) as count) FROM ElectionVotes ev GROUP BY party_id ORDER BY count(party_id) DESC")
-	public List<Integer> winningParty();
+	@Query("select new com.example.electrolcommisioncom.domain.WinningParty(ev.partyid as id, count(ev) as count) FROM ElectionVotes ev GROUP BY ev.partyid ORDER BY count(ev) DESC")
+	public List<WinningParty> overallWinningParty();
+	
+	@Query("select new com.example.electrolcommisioncom.domain.WinningParty(ev.partyid as id, count(ev) as count) FROM ElectionVotes ev where ev.constituencyid= (:id) GROUP BY ev.partyid ORDER BY count(ev) DESC")
+	public List<WinningParty> constituencyWinningParty(@Param("id") Long id);
 	
 }

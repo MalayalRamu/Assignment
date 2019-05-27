@@ -12,6 +12,9 @@ public interface ElectionVoteService {
 	String castVote(CastRequest request);
 	
 	ElectionVotes getVote(Long id);
-
+	
+	Party findOverallWinningparty();
+	
+	Party findConstituencyWinningparty(Long constituencyid);
 
 }

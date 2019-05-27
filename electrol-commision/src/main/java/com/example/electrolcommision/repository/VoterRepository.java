@@ -7,7 +7,5 @@ import com.example.electrolcommision.entity.Voter;
 
 
 public interface VoterRepository extends CrudRepository<Voter, Long>{
-	@EntityGraph(attributePaths = "Constituency")
-	Voter findOneWithConstituencyById(Long Id);
 
 }

@@ -12,6 +12,4 @@ public interface VoterService {
 
 	List<Voter> getAllVoters();
 
-//	ElectionVotes castVote(CastRequest request);
-
 }

@@ -13,12 +13,12 @@ public class WinningParty {
 	public Long getParty_id() {
 		return party_id;
 	}
-	public void setParty_id(Long party_id) {
-		this.party_id = party_id;
+	public void setParty_id(Long id) {
+		this.party_id = id;
 	}
 	
-	public WinningParty(Long party_id,Long count) {
-		this.party_id=party_id;
+	public WinningParty(Long id,Long count) {
+		this.party_id=id;
 		this.count=count;
 	}
 }
