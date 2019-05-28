@@ -13,6 +13,7 @@ import com.example.electrolcommision.entity.ElectionVotes;
 import com.example.electrolcommision.entity.Party;
 import com.example.electrolcommision.service.ElectionVoteService;
 import com.example.electrolcommisioncom.domain.CastRequest;
+import com.example.electrolcommisioncom.domain.VoteDetails;
 
 @RestController
 public class ElectionVotesController {
@@ -26,7 +27,7 @@ public class ElectionVotesController {
 	}
 	
 	@GetMapping("/ec/vote/deatils/{id}")
-	public ElectionVotes getVote(@PathVariable("id") Long id){
+	public VoteDetails getVote(@PathVariable("id") Long id){
 		return electionvoteService.getVote(id);
 	}
 	

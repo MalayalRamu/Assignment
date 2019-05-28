@@ -13,6 +13,7 @@ import com.example.electrolcommision.repository.ElectionVotesRepository;
 import com.example.electrolcommision.repository.PartyRepository;
 import com.example.electrolcommision.repository.VoterRepository;
 import com.example.electrolcommisioncom.domain.CastRequest;
+import com.example.electrolcommisioncom.domain.VoteDetails;
 import com.example.electrolcommisioncom.domain.WinningParty;
 
 
@@ -44,8 +45,11 @@ public class ElectionVoteServiceImpl implements ElectionVoteService{
 	}
 
 	@Override
-	public ElectionVotes getVote(Long id) {
-		return ElectionVotesRepo.findById(id).get();
+	public VoteDetails getVote(Long id) {
+		VoteDetails vote = new VoteDetails();
+		vote.setParty(PartyRepo.findById(ElectionVotesRepo.findById(id).get().getpartyid()).get());
+		vote.setVoter(voterRepo.findById(ElectionVotesRepo.findById(id).get().getvoterid()).get());
+		return vote;
 	}
 
 	@Override
