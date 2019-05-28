@@ -2,9 +2,7 @@ package com.example.electrolcommision.service;
 
 import java.util.List;
 
-import com.example.electrolcommision.entity.ElectionVotes;
 import com.example.electrolcommision.entity.Voter;
-import com.example.electrolcommisioncom.domain.CastRequest;
 
 public interface VoterService {
 

@@ -14,20 +14,20 @@ public class Party {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="party_id")
-	private Long partyId;
+	private Long id;
 	@Column(name="partyname")
-	private String partyname;
+	private String name;
 	public Long getId() {
-		return partyId;
+		return id;
 	}
-	public void setId(Long PartyId) {
-		this.partyId = PartyId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getName() {
-		return partyname;
+		return name;
 	}
 	public void setName(String name) {
-		this.partyname = name;
+		this.name = name;
 	}
 	
 	
