@@ -30,12 +30,14 @@ public class ElectionVoteServiceImpl implements ElectionVoteService{
 
 	@Override
 	public String castVote(CastRequest request) {
-		Optional<Voter> ovoter = voterRepo.findById(request.getVoterId());
+//		Optional<Voter> ovoter = voterRepo.findById(request.getVoterId());
+		Optional<Voter> ovoter = voterRepo.findById(request.getVoter().getId());
 		if(ovoter.isPresent()) {
 			Voter voter = ovoter.get();
 			ElectionVotes electionVote = null;
 			if(!voter.isVoted()) {
-				electionVote=ElectionVotes.newVote(request.getPartyId(), voter.getConstituency().getId(), request.getVoterId());
+//				electionVote=ElectionVotes.newVote(request.getPartyId(), voter.getConstituency().getId(), request.getVoterId());
+				electionVote=ElectionVotes.newVote(request.getParty(), voter.getConstituency(), request.getVoter());
 				voter.setVoted(true);
 				ElectionVotesRepo.save(electionVote);
 				voterRepo.save(voter);
@@ -47,15 +49,18 @@ public class ElectionVoteServiceImpl implements ElectionVoteService{
 	@Override
 	public VoteDetails getVote(Long id) {
 		VoteDetails vote = new VoteDetails();
-		vote.setParty(PartyRepo.findById(ElectionVotesRepo.findById(id).get().getpartyid()).get());
-		vote.setVoter(voterRepo.findById(ElectionVotesRepo.findById(id).get().getvoterid()).get());
+//		vote.setParty(PartyRepo.findById(ElectionVotesRepo.findById(id).get().getpartyid()).get());
+//		vote.setVoter(voterRepo.findById(ElectionVotesRepo.findById(id).get().getvoterid()).get());
+		vote.setParty(ElectionVotesRepo.findById(id).get().getParty());
+		vote.setVoter(voterRepo.findById(ElectionVotesRepo.findById(id).get().getVoter().getId()).get());
 		return vote;
 	}
 
 	@Override
 	public Party findOverallWinningparty() {
 		ArrayList<WinningParty> partycount = (ArrayList<WinningParty>) ElectionVotesRepo.overallWinningParty();
-		Party party=PartyRepo.findById(partycount.get(0).getParty_id()).get();
+//		Party party=PartyRepo.findById(partycount.get(0).getParty_id()).get();
+		Party party=partycount.get(0).getParty();
 		return party;
 	}
 
@@ -63,7 +68,8 @@ public class ElectionVoteServiceImpl implements ElectionVoteService{
 	@Override
 	public Party findConstituencyWinningparty(Long constituencyid) {
 		ArrayList<WinningParty> partycount = (ArrayList<WinningParty>) ElectionVotesRepo.constituencyWinningParty(constituencyid);
-		Party party=PartyRepo.findById(partycount.get(0).getParty_id()).get();
+//		Party party=PartyRepo.findById(partycount.get(0).getParty_id()).get();
+		Party party=partycount.get(0).getParty();
 		return party;
 	}
 
